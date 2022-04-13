@@ -19,7 +19,7 @@ public class Wordle {
       game = new Game("data/words.txt");
     }
 
-    //game.play();
-    //game.save("build/lastgame.txt");
+    game.play();
+    game.save("build/lastgame.txt");
   }
 }
