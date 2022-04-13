@@ -5,52 +5,31 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Game {
 	private int gameNumber;	
 	private String target;	//right answers
 	private String out = " ";
   // TODO: Implement constructor with String parameter
-	public Game(String filename) {
-		Calendar calendar= Calendar.getInstance();
-		SimpleDateFormat today= new SimpleDateFormat("yyyy-MM-dd");
-		//System.out.println(today.format(calendar.getTime()));
-		DateFormat dft = new SimpleDateFormat("yyyy-MM-dd");
-	    try {
-	        Date star = dft.parse("2022-04-12");// Start date
-	        Date endDay=dft.parse(today.format(calendar.getTime()));//today date
-	        Date nextDay=star;
-	        int i=0;
-	        while(nextDay.before(endDay)){	//Terminates the loop if tomorrow is not before the end time
-	        	Calendar cld = Calendar.getInstance();
-	 	        cld.setTime(star);
-	 	        cld.add(Calendar.DATE, 1);
-	 	        star = cld.getTime();
-	 	        //Gets the date string for the next day
-	 	        nextDay = star; 
-	 	        i++;
-	        }
-	        gameNumber = i;
-	    } catch (ParseException e) {
-	        e.printStackTrace();
-	    }
+	public Game(String filename) throws IOException {
+		LocalDate start = LocalDate.of(2021,5,1);//开始时间
+		LocalDate end = LocalDate.now();//当前时间
+		Long ch = end.toEpochDay() - start.toEpochDay();//天数差
+		int i = ch.intValue();
+	    gameNumber = i;
 	    WordList wordlist = new WordList(filename);
 	    target = wordlist.getWord(gameNumber);
 	}
   // TODO: Implement constructor with int and String parameters
-	public Game(int num,String filename) {
+	public Game(int num,String filename) throws IOException {
 		gameNumber = num;
 		WordList wordlist = new WordList(filename);
 	    target = wordlist.getWord(gameNumber);
 	}
   // TODO: Implement play() method
 	public void play() {
-		Guess guess = new Guess(target.length(),target);
+		Guess guess = new Guess(1,target);
 		System.out.printf("WORDLE %d\n",gameNumber);
 		int guessNumber = guess.getGuessNumber();
 		StringBuilder st = new StringBuilder();
@@ -59,7 +38,7 @@ public class Game {
 			  String chosenWord = guess.getChosenWord();
 			  guess.compareWith(target);
 			  System.out.println(guess.compareWith(target));
-			  st.append(guess.compareWith(target));
+			  st.append(guess.compareWith(target)+"\n");
 			  boolean matches = guess.matches(target);
 			  if(matches == true && guessNumber ==1) {
 				  System.out.println("Superb - Got it in one!");
@@ -72,7 +51,8 @@ public class Game {
 				  System.out.println("That was a close call!");
 				  break;}
 			  if(matches == false && guessNumber == 6) {
-				  System.out.println(" Better luck next time!");
+				  System.out.println("Nope  -  Better  luck  next  time! on one line.");
+				  System.out.println(target);
 			  }}
 		out = st.toString();
 	}
