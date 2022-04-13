@@ -13,7 +13,7 @@ public class Game {
 	private String out = " ";
   // TODO: Implement constructor with String parameter
 	public Game(String filename) throws IOException {
-		LocalDate start = LocalDate.of(2021,5,1);//开始时间
+		LocalDate start = LocalDate.of(2021,6,19);//开始时间
 		LocalDate end = LocalDate.now();//当前时间
 		Long ch = end.toEpochDay() - start.toEpochDay();//天数差
 		int i = ch.intValue();
@@ -29,11 +29,11 @@ public class Game {
 	}
   // TODO: Implement play() method
 	public void play() {
-		Guess guess = new Guess(1,target);
+		Guess guess = new Guess(1,"targe");
 		System.out.printf("WORDLE %d\n",gameNumber);
 		int guessNumber = guess.getGuessNumber();
 		StringBuilder st = new StringBuilder();
-		for(guessNumber = 1;guessNumber<=6;guessNumber++) {
+		while(guessNumber<=6) {
 			  System.out.printf("\nEnter guess (%d/6):",guessNumber);
 			  String chosenWord = guess.getChosenWord();
 			  guess.compareWith(target);
@@ -53,7 +53,8 @@ public class Game {
 			  if(matches == false && guessNumber == 6) {
 				  System.out.println("Nope  -  Better  luck  next  time! on one line.");
 				  System.out.println(target);
-			  }}
+			  }
+			  guessNumber = guessNumber+1;}
 		out = st.toString();
 	}
   // TODO: Implement save() method, with a String parameter

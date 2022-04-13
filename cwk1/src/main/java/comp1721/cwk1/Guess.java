@@ -25,7 +25,7 @@ public class Guess {
 		  throw new GameException("The guess number is invalid.");
 	  }
 	  chosenWord = word;
-	  if(guessNumber!=1 && chosenWord.length() != 5) {
+	  if(chosenWord.length() != 5) {
 		  throw new GameException("Please enter a word with five letters.");
 	  }
   }
