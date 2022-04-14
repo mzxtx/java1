@@ -13,9 +13,9 @@ public class Game {
 	private String out = " ";
   // TODO: Implement constructor with String parameter
 	public Game(String filename) throws IOException {
-		LocalDate start = LocalDate.of(2021,6,19);//开始时间
-		LocalDate end = LocalDate.now();//当前时间
-		Long ch = end.toEpochDay() - start.toEpochDay();//天数差
+		LocalDate start = LocalDate.of(2021,6,19);//锟斤拷始时锟斤拷
+		LocalDate end = LocalDate.now();//today time
+		Long ch = end.toEpochDay() - start.toEpochDay();//Number of days difference
 		int i = ch.intValue();
 	    gameNumber = i;
 	    WordList wordlist = new WordList(filename);

@@ -9,7 +9,7 @@ import java.util.List;
 public class WordList {
 	private List<String> words = new ArrayList<String>();;
   // TODO: Implement constructor with a String parameter
-	public WordList(String filename) throws IOException {
+	public WordList(String filename) throws IOException,GameException {
 		FileReader fileReader =new FileReader(filename);
         BufferedReader Reader =new BufferedReader(fileReader);
         String str=null;
@@ -26,9 +26,9 @@ public class WordList {
 		return size_words;
 	}
   // TODO: Implement getWord() with an int parameter, returning a String
-	public String getWord(int n) {
+	public String getWord(int n) throws GameException{
 		size();
-		if(n>size()) {
+		if( n>size() || n<0) {
 			throw new GameException("Invalid game.");
 		}
 		String word= words.get(n);

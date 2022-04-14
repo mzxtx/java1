@@ -6,11 +6,11 @@ import java.util.Scanner;
 public class Guess {
   // Use this to get player input in readFromPlayer()
   private static final Scanner INPUT = new Scanner(System.in);
-  private int guessNumber;	//ÓÃ»§²Â²âµÄ´ÎÊý
-  private String chosenWord;	//µ±Ç°ÓÃ»§²Â²âµÄµ¥´Ê
+  private int guessNumber;
+  private String chosenWord;
 
   // TODO: Implement constructor with int parameter
-  public Guess(int num) {
+  public Guess(int num) throws GameException{
 	  //initialize guessNumber
 	  guessNumber = num;
 	  if(guessNumber<1 || guessNumber>6) {
@@ -19,7 +19,7 @@ public class Guess {
   }
 
   // TODO: Implement constructor with int and String parameters
-  public Guess(int num,String word) {
+  public Guess(int num,String word) throws GameException{
 	  guessNumber = num;
 	  if(guessNumber<1 || guessNumber>6) {
 		  throw new GameException("The guess number is invalid.");
@@ -31,19 +31,19 @@ public class Guess {
   }
 
   // TODO: Implement getGuessNumber(), returning an int
-  public int getGuessNumber() {//µ±Ç°²ÂµÄµÚ¼¸´Î
+  public int getGuessNumber() {//ï¿½ï¿½Ç°ï¿½ÂµÄµÚ¼ï¿½ï¿½ï¿½
 	  return guessNumber;
   }
 
   // TODO: Implement getChosenWord(), returning a String
-  public String getChosenWord() {//µ±Ç°ÓÃ»§²Â²âµÄµ¥´Ê
+  public String getChosenWord() {//ï¿½ï¿½Ç°ï¿½Ã»ï¿½ï¿½Â²ï¿½Äµï¿½ï¿½ï¿½
 	  readFromPlayer();
+	  chosenWord = chosenWord.toUpperCase();
 	  return chosenWord;
   }
   // TODO: Implement readFromPlayer()
-  public void readFromPlayer() {//¶ÁÈ¡µ½ÓÃ»§µÄÊäÈë²¢¸³Öµµ½chosenWord
-	  String w = INPUT.next();
-	  chosenWord = w.toUpperCase();
+  public void readFromPlayer() {//ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë²¢ï¿½ï¿½Öµï¿½ï¿½chosenWord
+	  chosenWord = INPUT.next();
   }
   // TODO: Implement compareWith(), giving it a String parameter and String return type
   public String compareWith(String target) {
